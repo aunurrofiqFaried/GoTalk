@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "11390946657",
+    "project_id": "gotalk-3227e",
+    "storage_bucket": "gotalk-3227e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11390946657:android:724338e0799ab38b770920",
+        "android_client_info": {
+          "package_name": "com.trioWekWek.gotalk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYgw2wtIB4ZojDNeeMO3lsC6VbJLRWPVU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
