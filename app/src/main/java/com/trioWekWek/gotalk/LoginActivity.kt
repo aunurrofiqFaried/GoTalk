@@ -8,7 +8,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.trioWekWek.gotalk.R
 import com.trioWekWek.gotalk.databinding.ActivityLoginBinding
-
+//
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
