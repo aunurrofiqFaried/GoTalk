@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.trioWekWek.gotalk.HomeActivity
 import com.trioWekWek.gotalk.databinding.ActivitySignUpBinding
 
 class SignUpActivity : AppCompatActivity() {
@@ -18,14 +19,21 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_sign_up)
+        setContentView(R.layout.activity_sign_up)
 
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
         auth = FirebaseAuth.getInstance()
-
+        binding.btnLogin.setOnClickListener {
+                val intent = Intent(
+                    this@SignUpActivity,
+                    LoginActivity::class.java
+                )
+                startActivity(intent)
+                finish()
+        }
         binding.btnSignUp.setOnClickListener {
             val userName = binding.etName.text.toString()
             val email = binding.etEmail.text.toString()
@@ -74,7 +82,7 @@ class SignUpActivity : AppCompatActivity() {
 
                     databaseReference.setValue(hashMap).addOnCompleteListener(this){
                         if (it.isSuccessful){
-                            val intent = Intent(this@SignUpActivity,HomeActivity::class.java)
+                            val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
                             startActivity(intent)
                         }
                     }

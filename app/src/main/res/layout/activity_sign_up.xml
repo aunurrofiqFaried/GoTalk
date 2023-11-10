@@ -92,7 +92,7 @@
             android:textColor="@color/black"
             android:background="@color/colorPrimary" />
         <Button
-            android:id="@+id/btnSignIn"
+            android:id="@+id/btnLogin"
             android:width="0dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
