@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChatAPP</string>
+    <string name="app_name">GoTalk</string>
     <string name="enter_name">Enter Name</string>
     <string name="enter_email">Enter Email</string>
     <string name="label_sign_up">Sign Up</string>
@@ -8,4 +8,5 @@
     <string name="btn_sign_in">Login</string>
     <string name="enter_password">Enter Password</string>
     <string name="enter_confirm_password">Enter Confirm Password</string>
+    <string name="keterangan">Jika Belum Memiliki Akun Silahkan Sign Up Dahulu</string>
 </resources>
