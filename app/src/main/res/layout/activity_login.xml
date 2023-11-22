@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="@drawable/gambar1"
     android:orientation="vertical">
 
     <TextView
@@ -18,7 +19,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 
     <EditText
@@ -38,7 +38,6 @@
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
         android:inputType="textPassword"
@@ -54,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginEnd="15dp"
         android:background="@color/colorPrimary"
         android:text="@string/btn_sign_up"
         android:textColor="#37474F" />
@@ -66,8 +65,21 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:background="@color/colorDarkGray"
-        android:textColor="@color/colorAccent"
-        android:text="@string/btn_sign_in"/>
+        android:text="@string/btn_sign_in"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/keterangan"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </LinearLayout>
