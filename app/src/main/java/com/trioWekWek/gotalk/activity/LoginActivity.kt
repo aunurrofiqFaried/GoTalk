@@ -1,4 +1,4 @@
-package com.trioWekWek.gotalk
+package com.trioWekWek.gotalk.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
                             binding.etEmail.setText("")
                             binding.etPassword.setText("")
                             val intent = Intent(
-                                this@LoginActivity, HomeActivity
+                                this@LoginActivity, UsersActivity
                                 ::class.java
                             )
                             startActivity(intent)
