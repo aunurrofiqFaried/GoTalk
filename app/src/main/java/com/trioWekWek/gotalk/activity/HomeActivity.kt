@@ -1,7 +1,9 @@
-package com.trioWekWek.gotalk
+package com.trioWekWek.gotalk.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.trioWekWek.gotalk.R
+
 //
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

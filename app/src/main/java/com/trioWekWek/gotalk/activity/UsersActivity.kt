@@ -18,12 +18,11 @@ import com.trioWekWek.gotalk.R
 import com.trioWekWek.gotalk.adapter.UserAdapter
 import com.trioWekWek.gotalk.databinding.ActivityUsersBinding
 import com.trioWekWek.gotalk.model.User
-import com.trioWekWek.gotalk.model.listUSer
 
 class UsersActivity : AppCompatActivity() {
     private lateinit var  binding: ActivityUsersBinding
-    private lateinit var adapter: UserAdapter
     private lateinit var recycle: RecyclerView
+    var userList = ArrayList<User>()
     @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,29 +31,30 @@ class UsersActivity : AppCompatActivity() {
         binding = ActivityUsersBinding.inflate(layoutInflater)
         recycle.layoutManager = LinearLayoutManager(this,LinearLayout.VERTICAL,false)
 
+
         getUserList()
     }
 
     fun getUserList() {
         val firebase: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
-        val databaseReference:DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
+        val databaseReference:DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
         databaseReference.addValueEventListener(object :ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(applicationContext, error.message, Toast.LENGTH_SHORT).show()
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                listUSer.clear()
+                userList.clear()
 
                 for (dataSnapShot: DataSnapshot in snapshot.children) {
                     val user = dataSnapShot.getValue(User::class.java)
 
                     if (!user!!.userId.equals(firebase.uid)) {
-                        listUSer.add(user)
+                        userList.add(user)
                     }
                 }
-                adapter = UserAdapter(this@UsersActivity, listUSer)
-                recycle.adapter = adapter
+                val userAdapter = UserAdapter(this@UsersActivity, userList)
+                recycle.adapter = userAdapter
             }
         })
     }
