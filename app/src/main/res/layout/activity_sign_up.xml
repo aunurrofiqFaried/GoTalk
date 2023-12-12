@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    tools:viewBindingIgnore="false"
     android:gravity="center"
-    android:background="@drawable/gambar1"
     tools:context=".activity.SignUpActivity">
 
     <TextView

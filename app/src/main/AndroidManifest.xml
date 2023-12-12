@@ -36,7 +36,7 @@
         </activity>
 
         <activity
-            android:name=".activity.HomeActivity"
+            android:name=".activity.ProfileActivity"
             android:exported="false" />
 
         <activity

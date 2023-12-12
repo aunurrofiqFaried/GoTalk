@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.trioWekWek.gotalk.R
 import com.trioWekWek.gotalk.databinding.ActivityLoginBinding
 
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    private lateinit var firebaseUser : FirebaseUser
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +25,18 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
 
         auth = FirebaseAuth.getInstance()
+        firebaseUser = auth.currentUser!!
+
+
+//        cek apa user sudah login akan di arahkan ke useractivity
+        if (firebaseUser != null){
+            val intent = Intent(
+                this@LoginActivity, UsersActivity
+                ::class.java
+            )
+            startActivity(intent)
+            finish()
+        }
 
         binding.btnSignIn.setOnClickListener {
             val email = binding.etEmail.text.toString()

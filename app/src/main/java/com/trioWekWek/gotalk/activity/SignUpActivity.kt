@@ -84,6 +84,7 @@ class SignUpActivity : AppCompatActivity() {
                         if (it.isSuccessful){
                             val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
                             startActivity(intent)
+                            finish()
                         }
                     }
                 }

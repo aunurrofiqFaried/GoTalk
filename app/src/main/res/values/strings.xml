@@ -4,6 +4,8 @@
     <string name="enter_email">Enter Email</string>
     <string name="label_sign_up">Sign Up</string>
     <string name="label_sign_in">Sign In</string>
+    <string name="label_message">Message</string>
+    <string name="label_profile">Profile</string>
     <string name="btn_sign_up">Sign Up</string>
     <string name="btn_sign_in">Login</string>
     <string name="enter_password">Enter Password</string>
