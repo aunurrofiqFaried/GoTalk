@@ -8,6 +8,7 @@
     <string name="label_profile">Profile</string>
     <string name="btn_sign_up">Sign Up</string>
     <string name="btn_sign_in">Login</string>
+    <string name="btn_save">Save</string>
     <string name="enter_password">Enter Password</string>
     <string name="enter_confirm_password">Enter Confirm Password</string>
     <string name="keterangan">Jika Belum Memiliki Akun Silahkan Sign Up Dahulu</string>
