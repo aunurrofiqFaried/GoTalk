@@ -27,7 +27,6 @@ class LoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         firebaseUser = auth.currentUser!!
 
-
 //        cek apa user sudah login akan di arahkan ke useractivity
         if (firebaseUser != null){
             val intent = Intent(
@@ -35,12 +34,11 @@ class LoginActivity : AppCompatActivity() {
                 ::class.java
             )
             startActivity(intent)
-            finish()
         }
 
-        binding.btnSignIn.setOnClickListener {
-            val email = binding.etEmail.text.toString()
-            val password = binding.etPassword.text.toString()
+        binding.btnSignInLogin.setOnClickListener {
+            val email = binding.etEmailLogin.text.toString()
+            val password = binding.etPasswordLogin.text.toString()
 
             if (TextUtils.isEmpty(email) && TextUtils.isEmpty(password)) {
                 Toast.makeText(
@@ -52,8 +50,8 @@ class LoginActivity : AppCompatActivity() {
                 auth!!.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) {
                         if (it.isSuccessful) {
-                            binding.etEmail.setText("")
-                            binding.etPassword.setText("")
+                            binding.etEmailLogin.setText("")
+                            binding.etPasswordLogin.setText("")
                             val intent = Intent(
                                 this@LoginActivity, UsersActivity
                                 ::class.java
@@ -71,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnSignUp.setOnClickListener {
+        binding.btnSignUpLogin.setOnClickListener {
             val intent = Intent(
                 this@LoginActivity,
                 SignUpActivity::class.java

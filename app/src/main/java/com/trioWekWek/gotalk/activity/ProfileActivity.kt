@@ -10,10 +10,13 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -40,6 +43,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var userName: TextView
     private lateinit var userImage: ImageView
     private lateinit var userImageProfile: ImageView
+    private lateinit var etUserName: EditText
     private lateinit var btnSave: Button
     private lateinit var progressBar: ProgressBar
 
@@ -64,15 +68,15 @@ class ProfileActivity : AppCompatActivity() {
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user = snapshot.getValue(User::class.java)
-                userName = findViewById(R.id.userName)
-                userImage = findViewById(R.id.userImageProfile)
+                etUserName = findViewById(R.id.etUserName)
+//                userImage = findViewById(R.id.userImageProfile)
 
-                userName.text = user!!.userName
+                etUserName.setText(user!!.userName)
 
-                if (user.userImage == ""){
-                    userImage.setImageResource(R.drawable.profile_image)
+                if (user.profileImage == ""){
+                    userImageProfile.setImageResource(R.drawable.profile_image)
                 }else{
-                    Glide.with(this@ProfileActivity).load(user.userImage).into(userImage)
+                    Glide.with(this@ProfileActivity).load(user.profileImage).into(userImageProfile)
                 }
             }
 
@@ -95,10 +99,18 @@ class ProfileActivity : AppCompatActivity() {
 
         btnSave.setOnClickListener {
             uploadImage()
+            binding.progressBar.visibility = View.VISIBLE
         }
     }
 
+//    val getImage = registerForActivityResult(
+//        ActivityResultContracts.GetContent(),
+//        ActivityResultCallback {
+//            userImageProfile.setImageURI(it)
+//        }
+//    )
     private fun choseeImage(){
+//        getImage.launch("image/*")
         val intent:Intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
@@ -127,6 +139,11 @@ class ProfileActivity : AppCompatActivity() {
             ref.putFile(filePath!!)
                 .addOnSuccessListener {
                         progressBar = findViewById(R.id.progressBar)
+                        etUserName = findViewById(R.id.etUserName)
+                        val hashMap:HashMap<String,String> = HashMap()
+                        hashMap.put("userName",etUserName.text.toString())
+                        hashMap.put("profileImage",filePath.toString())
+                        databaseReference.updateChildren(hashMap as Map<String, Any>)
                         progressBar.visibility = View.GONE
                         Toast.makeText(applicationContext,"Uploaded",Toast.LENGTH_SHORT).show()
                         btnSave.visibility = View.GONE

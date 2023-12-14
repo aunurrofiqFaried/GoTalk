@@ -65,10 +65,10 @@ class UsersActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 userList.clear()
                 val currentUser = snapshot.getValue(User::class.java)
-                if (currentUser!!.userImage == ""){
+                if (currentUser!!.profileImage == ""){
                     binding.imgProfile.setImageResource(R.drawable.profile_image)
                 }else{
-                    Glide.with(this@UsersActivity).load(currentUser.userImage).into(binding.imgProfile)
+                    Glide.with(this@UsersActivity).load(currentUser.profileImage).into(binding.imgProfile)
                 }
 
                 for (dataSnapShot: DataSnapshot in snapshot.children) {

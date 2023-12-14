@@ -61,15 +61,17 @@
                 app:civ_border_width="1dp"
                 tools:ignore="RedundantNamespace" />
 
-            <TextView
-                android:id="@+id/userName"
+            <EditText
+                android:id="@+id/etUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:background="@color/white"
                 android:textAlignment="center"
                 android:maxLines="1"
                 android:textSize="20sp"
-                android:fontFamily="sans-serif-black" />
+                android:fontFamily="sans-serif-black"
+                android:text="TrioWekWek"/>
 
             <Button
                 android:layout_marginTop="15dp"
