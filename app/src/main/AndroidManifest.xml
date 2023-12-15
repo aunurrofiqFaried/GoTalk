@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,29 +15,19 @@
         android:theme="@style/Theme.GoTalk"
         tools:targetApi="31">
 
-        <activity
-            android:name=".activity.UsersActivity"/>
-
+        <activity android:name=".activity.UsersActivity" />
         <activity
             android:name=".activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".activity.ProfileActivity"/>
-
-        <activity
-            android:name=".activity.SignUpActivity"/>
-
-<!--        <activity-->
-<!--            android:name=".activity.SplashscreenActivity"-->
-<!--            android:exported="true" >-->
-<!--        </activity>-->
-
+        <activity android:name=".activity.ProfileActivity" />
+        <activity android:name=".activity.SignUpActivity" />
+        <activity android:name=".activity.ChatActivity" />
     </application>
 
 </manifest>
