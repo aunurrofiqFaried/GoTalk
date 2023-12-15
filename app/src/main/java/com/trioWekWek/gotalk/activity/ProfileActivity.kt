@@ -40,8 +40,6 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var firebaseUser : FirebaseUser
     private lateinit var databaseReference: DatabaseReference
     private lateinit var imgBack: ImageView
-    private lateinit var userName: TextView
-    private lateinit var userImage: ImageView
     private lateinit var userImageProfile: ImageView
     private lateinit var etUserName: EditText
     private lateinit var btnSave: Button
@@ -111,6 +109,7 @@ class ProfileActivity : AppCompatActivity() {
 //    )
     private fun choseeImage(){
 //        getImage.launch("image/*")
+
         val intent:Intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
