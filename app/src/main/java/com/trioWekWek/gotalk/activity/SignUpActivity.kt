@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.trioWekWek.gotalk.R
 import com.trioWekWek.gotalk.databinding.ActivitySignUpBinding
 
+
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth

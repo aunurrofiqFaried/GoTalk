@@ -29,6 +29,7 @@ class UsersActivity : AppCompatActivity() {
     private lateinit var imgProfile: ImageView
     private lateinit var imgBack: ImageView
     var userList = ArrayList<User>()
+
     @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

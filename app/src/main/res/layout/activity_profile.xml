@@ -72,7 +72,7 @@
                 android:maxLines="1"
                 android:textSize="20sp"
                 android:fontFamily="sans-serif-black"
-                android:text="TrioWekWek"/>
+                android:text="@string/TrioWekWek"/>
 
             <Button
                 android:layout_marginTop="15dp"

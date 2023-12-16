@@ -1,34 +1,45 @@
 package com.trioWekWek.gotalk.activity
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.trioWekWek.gotalk.R
+import com.trioWekWek.gotalk.adapter.ChatAdapter
+import com.trioWekWek.gotalk.adapter.UserAdapter
+import com.trioWekWek.gotalk.databinding.ActivityUsersBinding
+import com.trioWekWek.gotalk.model.Chat
 import com.trioWekWek.gotalk.model.User
 
 class ChatActivity : AppCompatActivity() {
     var firebaseUser:FirebaseUser? = null
     var reference:DatabaseReference? = null
+    var chatlist = ArrayList<Chat>()
+    private lateinit var  binding: ActivityUsersBinding
     private lateinit var imgProfile : ImageView
     private lateinit var tvUserName : TextView
     private lateinit var  imgBack : ImageView
     private lateinit var  btnSendMessage : ImageButton
     private lateinit var  etMessage : EditText
+    private lateinit var recycle: RecyclerView
 
 
+
+    @SuppressLint("MissingInflatedId", "WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
+        recycle = findViewById(R.id.chatRecyclerView)
+        binding = ActivityUsersBinding.inflate(layoutInflater)
+        recycle.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL,false)
 
         var intent = getIntent()
         var userId = intent.getStringExtra("userId")
@@ -64,15 +75,19 @@ class ChatActivity : AppCompatActivity() {
             }
         })
 
-        btnSendMessage.setOnClickListener({
+        btnSendMessage.setOnClickListener{
             var message:String = etMessage.text.toString()
 
             if (message.isEmpty()){
                 Toast.makeText(applicationContext,"message is empety",Toast.LENGTH_SHORT).show()
+                etMessage.setText("")
             }else{
                 sendMessage(firebaseUser!!.uid,userId,message)
+                etMessage.setText("")
             }
-        })
+        }
+
+        readMessage(firebaseUser!!.uid,userId)
 
 
     }
@@ -85,6 +100,31 @@ class ChatActivity : AppCompatActivity() {
         hashMap.put("receiverId",receiverId)
         hashMap.put("message",message)
 
-        reference!!.child("Chat").push().setValue(hashMap)
+        reference!!.child("chat").push().setValue(hashMap)
+    }
+
+    fun readMessage(senderId: String,receiverId: String) {
+        val databaseReference:DatabaseReference =
+            FirebaseDatabase.getInstance().getReference("chat")
+        databaseReference.addValueEventListener(object :ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                chatlist.clear()
+                for (dataSnapShot: DataSnapshot in snapshot.children) {
+                    val chat = dataSnapShot.getValue(Chat::class.java)
+
+                    if (chat!!.senderId.equals(senderId) && chat!!.receiverId.equals(receiverId) ||
+                        chat!!.senderId.equals(receiverId) && chat!!.receiverId.equals(senderId)
+                    ) {
+                        chatlist.add(chat)
+                    }
+                }
+                val chatAdapter = ChatAdapter(this@ChatActivity, chatlist)
+                recycle.adapter = chatAdapter
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO()
+            }
+        })
     }
 }
