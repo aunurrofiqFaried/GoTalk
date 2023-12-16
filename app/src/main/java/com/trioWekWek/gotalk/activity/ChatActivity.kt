@@ -1,10 +1,14 @@
 package com.trioWekWek.gotalk.activity
 
+import android.content.BroadcastReceiver
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -18,6 +22,9 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var imgProfile : ImageView
     private lateinit var tvUserName : TextView
     private lateinit var  imgBack : ImageView
+    private lateinit var  btnSendMessage : ImageButton
+    private lateinit var  etMessage : EditText
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +36,9 @@ class ChatActivity : AppCompatActivity() {
         imgProfile = findViewById(R.id.imgProfile)
         tvUserName = findViewById(R.id.tvUserName)
         imgBack = findViewById(R.id.imgBack)
+        btnSendMessage = findViewById(R.id.btnSendMessage)
+        etMessage = findViewById(R.id.etMessage)
+
 
         firebaseUser = FirebaseAuth.getInstance().currentUser
         reference = FirebaseDatabase.getInstance().getReference("users").child(userId!!)
@@ -54,6 +64,27 @@ class ChatActivity : AppCompatActivity() {
             }
         })
 
+        btnSendMessage.setOnClickListener({
+            var message:String = etMessage.text.toString()
 
+            if (message.isEmpty()){
+                Toast.makeText(applicationContext,"message is empety",Toast.LENGTH_SHORT).show()
+            }else{
+                sendMessage(firebaseUser!!.uid,userId,message)
+            }
+        })
+
+
+    }
+
+    private fun sendMessage(senderId:String,receiverId:String,message:String){
+        var reference:DatabaseReference? = FirebaseDatabase.getInstance().getReference()
+
+        var hashMap:HashMap<String,String> = HashMap()
+        hashMap.put("senderId",senderId)
+        hashMap.put("receiverId",receiverId)
+        hashMap.put("message",message)
+
+        reference!!.child("Chat").push().setValue(hashMap)
     }
 }

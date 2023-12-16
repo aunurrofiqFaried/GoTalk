@@ -2,6 +2,7 @@
     <string name="app_name">GoTalk</string>
     <string name="enter_name">Enter Name</string>
     <string name="enter_email">Enter Email</string>
+    <string name="type_message">Type Message</string>
     <string name="label_sign_up">Sign Up</string>
     <string name="label_sign_in">Sign In</string>
     <string name="label_message">Message</string>
