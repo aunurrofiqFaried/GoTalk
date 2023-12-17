@@ -132,8 +132,6 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun uploadImage(){
         if (filePath != null){
-
-
             var ref:StorageReference = storageRef.child("image/"+UUID.randomUUID().toString())
             ref.putFile(filePath!!)
                 .addOnSuccessListener {

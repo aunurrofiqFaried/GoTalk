@@ -1,6 +1,7 @@
 package com.trioWekWek.gotalk.activity
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,9 +19,13 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.iid.FirebaseInstanceIdReceiver
+import com.google.firebase.messaging.FirebaseMessaging
 import com.trioWekWek.gotalk.R
 import com.trioWekWek.gotalk.adapter.UserAdapter
 import com.trioWekWek.gotalk.databinding.ActivityUsersBinding
+import com.trioWekWek.gotalk.firebase.FirebaseService
 import com.trioWekWek.gotalk.model.User
 
 class UsersActivity : AppCompatActivity() {
@@ -36,6 +41,12 @@ class UsersActivity : AppCompatActivity() {
         setContentView(R.layout.activity_users)
         recycle = findViewById(R.id.userRecyclerView)
         binding = ActivityUsersBinding.inflate(layoutInflater)
+
+        FirebaseService.sharedPref = getSharedPreferences("sharedPref", MODE_PRIVATE)
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
+            FirebaseService.token = it.token
+        }
+
         recycle.layoutManager = LinearLayoutManager(this,LinearLayout.VERTICAL,false)
 
         imgProfile = findViewById(R.id.imgProfile)
@@ -43,8 +54,9 @@ class UsersActivity : AppCompatActivity() {
 
 
         imgBack.setOnClickListener{
-            onBackPressed()
+            finishAffinity()
         }
+
         imgProfile.setOnClickListener {
             val intent = Intent(
                 this@UsersActivity,
@@ -57,6 +69,10 @@ class UsersActivity : AppCompatActivity() {
 
     fun getUserList() {
         val firebase: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
+
+        var userid = firebase.uid
+        FirebaseMessaging.getInstance().subscribeToTopic("/topics/$userid")
+
         val databaseReference:DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
         databaseReference.addValueEventListener(object :ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
@@ -76,7 +92,7 @@ class UsersActivity : AppCompatActivity() {
                     val user = dataSnapShot.getValue(User::class.java)
 
                     if (!user!!.userId.equals(firebase.uid)) {
-                        userList.add(user)
+                         userList.add(user)
                     }
                 }
                 val userAdapter = UserAdapter(this@UsersActivity, userList)

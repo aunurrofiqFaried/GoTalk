@@ -26,15 +26,15 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 //        firebaseUser = auth.currentUser!!
-//
-////        cek apa user sudah login akan di arahkan ke useractivity
-//        if (firebaseUser != null){
-//            val intent = Intent(
-//                this@LoginActivity, UsersActivity
-//                ::class.java
-//            )
-//            startActivity(intent)
-//        }
+//        cek apa user sudah login akan di arahkan ke useractivity
+        if (auth.currentUser != null){
+            val intent = Intent(
+                this@LoginActivity, UsersActivity
+                ::class.java
+            )
+            startActivity(intent)
+            finish()
+        }
 
         binding.btnSignInLogin.setOnClickListener {
             val email = binding.etEmailLogin.text.toString()

@@ -12,17 +12,25 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import com.google.gson.Gson
 import com.trioWekWek.gotalk.R
+import com.trioWekWek.gotalk.RetrofitInstance
 import com.trioWekWek.gotalk.adapter.ChatAdapter
 import com.trioWekWek.gotalk.adapter.UserAdapter
 import com.trioWekWek.gotalk.databinding.ActivityUsersBinding
 import com.trioWekWek.gotalk.model.Chat
+import com.trioWekWek.gotalk.model.NotificationData
+import com.trioWekWek.gotalk.model.PushNotification
 import com.trioWekWek.gotalk.model.User
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ChatActivity : AppCompatActivity() {
     var firebaseUser:FirebaseUser? = null
     var reference:DatabaseReference? = null
     var chatlist = ArrayList<Chat>()
+    var topic = ""
     private lateinit var  binding: ActivityUsersBinding
     private lateinit var imgProfile : ImageView
     private lateinit var tvUserName : TextView
@@ -43,6 +51,7 @@ class ChatActivity : AppCompatActivity() {
 
         var intent = getIntent()
         var userId = intent.getStringExtra("userId")
+        var userName = intent.getStringExtra("userName")
 
         imgProfile = findViewById(R.id.imgProfile)
         tvUserName = findViewById(R.id.tvUserName)
@@ -84,12 +93,15 @@ class ChatActivity : AppCompatActivity() {
             }else{
                 sendMessage(firebaseUser!!.uid,userId,message)
                 etMessage.setText("")
+                topic = "/topics/$userId"
+                PushNotification(NotificationData(userName!!,message),
+                topic).also {
+                    sendNotification(it)
+                }
             }
         }
 
         readMessage(firebaseUser!!.uid,userId)
-
-
     }
 
     private fun sendMessage(senderId:String,receiverId:String,message:String){
@@ -126,5 +138,19 @@ class ChatActivity : AppCompatActivity() {
                 TODO()
             }
         })
+    }
+
+    private fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val response = RetrofitInstance.api.postNotification(notification)
+            if (response.isSuccessful){
+                Toast.makeText(this@ChatActivity, "Response ${Gson().toJson(response)}",Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this@ChatActivity, response.errorBody().toString(),Toast.LENGTH_SHORT).show()
+
+            }
+        }catch (e:Exception){
+
+        }
     }
 }

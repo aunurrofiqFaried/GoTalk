@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -14,10 +16,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GoTalk"
         tools:targetApi="31">
-
+        <service android:name=".firebase.FirebaseService"
+            android:permission="com.google.android.c2dm.permission.SEND"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
+        </service>
         <activity android:name=".activity.UsersActivity" />
-        <activity
-            android:name=".activity.LoginActivity"
+        <activity android:name=".activity.LoginActivity"/>
+        <activity android:name=".activity.ProfileActivity" />
+        <activity android:name=".activity.SignUpActivity" />
+        <activity android:name=".activity.ChatActivity" />
+        <activity android:name=".activity.SplashscreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,9 +37,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ProfileActivity" />
-        <activity android:name=".activity.SignUpActivity" />
-        <activity android:name=".activity.ChatActivity" />
     </application>
 
 </manifest>

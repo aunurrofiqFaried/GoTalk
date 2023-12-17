@@ -34,6 +34,7 @@ class UserAdapter(val context: Context,val userList:MutableList<User>) :
         holder.layoutUser.setOnClickListener {
             val intent = Intent(context,ChatActivity::class.java)
             intent.putExtra("userId",user.userId)
+            intent.putExtra("userName",user.userName)
             context.startActivity(intent)
         }
     }
