@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:id="@+id/layoutUser"
@@ -16,37 +17,26 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/userImage"
-        android:layout_width="64dp"
-        android:layout_height="59dp"
+        android:id="@+id/userImageListUser"
+        android:layout_width="58dp"
+        android:layout_height="50dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="7dp"
         app:civ_border_color="@color/colorPrimary"
         app:civ_border_width="1dp"
         tools:ignore="RedundantNamespace" />
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+
 
         <TextView
             android:id="@+id/userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="12dp"
             android:maxLines="1"
-            android:textSize="16sp"
-            android:fontFamily="sans-serif-black"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/ubuntureguler"
             android:text="trioWekWek"/>
-        <TextView
-            android:id="@+id/temp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:textSize="14sp"
-            android:fontFamily="sans-serif-black"
-            android:text="temp"/>
 
-        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

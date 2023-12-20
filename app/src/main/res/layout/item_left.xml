@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:id="@+id/layoutUser"
@@ -14,17 +15,6 @@
         android:padding="5dp"
         android:orientation="horizontal">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/userImage"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:src="@mipmap/ic_launcher"
-        tools:ignore="RedundantNamespace" />
-
-
         <TextView
             android:id="@+id/tvMessage"
             android:layout_width="wrap_content"
@@ -34,10 +24,25 @@
             android:padding="7dp"
             android:paddingStart="13dp"
             android:paddingEnd="13dp"
-            android:layout_marginTop="5dp"
-            android:textSize="15sp"
-            android:fontFamily="sans-serif-light"
+            android:layout_marginTop="3dp"
+            android:textSize="13sp"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/ubuntureguler"
             android:text="trioWekWek"/>
+
+        <ImageView
+            android:id="@+id/imgMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:background="@drawable/item_left_side_background"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="5dp"
+            android:padding="7dp"
+            android:paddingStart="13dp"
+            android:visibility="gone"
+            android:paddingEnd="13dp"/>
 
     </LinearLayout>
 </LinearLayout>

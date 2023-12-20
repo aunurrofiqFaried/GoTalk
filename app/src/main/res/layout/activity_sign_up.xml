@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:viewBindingIgnore="false"
+    android:background="@color/colorPrimary"
     android:gravity="center"
     tools:context=".activity.SignUpActivity">
 
@@ -13,11 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/label_sign_up"
+        android:fontFamily="@font/ubuntubold"
         android:textStyle="bold"
         android:padding="12dp"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="10dp"
         android:textSize="20sp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,12 +31,14 @@
         android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntureguler"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="5dp"
         android:inputType="text"
+        android:backgroundTint="@color/colorAccent"
         android:textColor="@color/colorText"
-        android:background="@color/colorTextBackground"
+        android:background="@drawable/rounded"
         android:padding="12dp"
         android:hint="@string/enter_name"/>
 
@@ -41,12 +46,14 @@
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntureguler"
+        android:backgroundTint="@color/colorAccent"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="5dp"
         android:inputType="textEmailAddress"
         android:textColor="@color/colorText"
-        android:background="@color/colorTextBackground"
+        android:background="@drawable/rounded"
         android:padding="12dp"
         android:hint="@string/enter_email"/>
 
@@ -54,12 +61,14 @@
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntureguler"
+        android:backgroundTint="@color/colorAccent"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="5dp"
         android:inputType="textPassword"
         android:textColor="@color/colorText"
-        android:background="@color/colorTextBackground"
+        android:background="@drawable/rounded"
         android:padding="12dp"
         android:hint="@string/enter_password"/>
 
@@ -67,12 +76,14 @@
         android:id="@+id/etConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntureguler"
+        android:backgroundTint="@color/colorAccent"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="5dp"
         android:inputType="textPassword"
         android:textColor="@color/colorText"
-        android:background="@color/colorTextBackground"
+        android:background="@drawable/rounded"
         android:padding="12dp"
         android:hint="@string/enter_confirm_password"/>
 
@@ -84,22 +95,24 @@
 
         <Button
             android:id="@+id/btnLogin"
+            android:fontFamily="@font/ubuntubold"
             android:width="0dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/btn_sign_in"
             android:layout_marginEnd="2dp"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/btnSignUp"
+            android:fontFamily="@font/ubuntubold"
             android:width="0dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/btn_sign_up"
             android:layout_marginStart="2dp"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

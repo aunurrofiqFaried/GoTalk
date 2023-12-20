@@ -1,17 +1,20 @@
 package com.trioWekWek.gotalk.activity
 
 import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
-import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.google.gson.Gson
 import com.trioWekWek.gotalk.R
 import com.trioWekWek.gotalk.RetrofitInstance
@@ -35,9 +38,17 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var imgProfile : ImageView
     private lateinit var tvUserName : TextView
     private lateinit var  imgBack : ImageView
+    private lateinit var  imgMessage : ImageView
     private lateinit var  btnSendMessage : ImageButton
+    private lateinit var  btnSendImage : ImageButton
     private lateinit var  etMessage : EditText
     private lateinit var recycle: RecyclerView
+
+    private lateinit var url: Uri
+    private var filePath: Uri? = null
+    private val PICK_IMAGE_REQUEST:Int = 2023
+    private lateinit var storage: FirebaseStorage
+    private lateinit var storageRef: StorageReference
 
 
 
@@ -49,15 +60,29 @@ class ChatActivity : AppCompatActivity() {
         binding = ActivityUsersBinding.inflate(layoutInflater)
         recycle.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL,false)
 
+        storage = FirebaseStorage.getInstance()
+        storageRef = storage.reference
+
         var intent = getIntent()
         var userId = intent.getStringExtra("userId")
         var userName = intent.getStringExtra("userName")
 
         imgProfile = findViewById(R.id.imgProfile)
         tvUserName = findViewById(R.id.tvUserName)
+//        imgMessage = findViewById(R.id.imgMessage)
         imgBack = findViewById(R.id.imgBack)
         btnSendMessage = findViewById(R.id.btnSendMessage)
+        btnSendImage = findViewById(R.id.btnSendImage)
         etMessage = findViewById(R.id.etMessage)
+
+
+        val galerry = registerForActivityResult(
+            ActivityResultContracts.GetContent(),
+            ActivityResultCallback {
+                btnSendImage.setImageURI(it)
+                url = it!!
+            }
+        )
 
 
         firebaseUser = FirebaseAuth.getInstance().currentUser
@@ -67,13 +92,16 @@ class ChatActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+        btnSendImage.setOnClickListener {
+            galerry.launch("image/*")
+        }
+
         reference!!.addValueEventListener(object : ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-
                 val user = snapshot.getValue(User::class.java)
                 tvUserName.text = user!!.userName
                 if (user.profileImage == ""){
@@ -86,6 +114,7 @@ class ChatActivity : AppCompatActivity() {
 
         btnSendMessage.setOnClickListener{
             var message:String = etMessage.text.toString()
+            uploadImage()
 
             if (message.isEmpty()){
                 Toast.makeText(applicationContext,"message is empety",Toast.LENGTH_SHORT).show()
@@ -104,6 +133,14 @@ class ChatActivity : AppCompatActivity() {
         readMessage(firebaseUser!!.uid,userId)
     }
 
+    private fun uploadImage() {
+        storage.getReference("image").child(System.currentTimeMillis().toString())
+            .putFile(url)
+            .addOnSuccessListener {task ->
+                task.metadata!!.reference!!.downloadUrl
+            }
+    }
+
     private fun sendMessage(senderId:String,receiverId:String,message:String){
         var reference:DatabaseReference? = FirebaseDatabase.getInstance().getReference()
 
@@ -111,6 +148,7 @@ class ChatActivity : AppCompatActivity() {
         hashMap.put("senderId",senderId)
         hashMap.put("receiverId",receiverId)
         hashMap.put("message",message)
+        hashMap.put("imgMessage",message)
 
         reference!!.child("chat").push().setValue(hashMap)
     }

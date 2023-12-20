@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.trioWekWek.gotalk.R
 import com.trioWekWek.gotalk.activity.ChatActivity
+import com.trioWekWek.gotalk.model.Chat
 import com.trioWekWek.gotalk.model.User
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -41,8 +42,8 @@ class UserAdapter(val context: Context,val userList:MutableList<User>) :
 
     class ViewHolder(view:View):RecyclerView.ViewHolder(view){
         val txtUserName:TextView = view.findViewById(R.id.userName)
-        val txtTemp:TextView = view.findViewById(R.id.temp)
-        val imgUser:CircleImageView = view.findViewById(R.id.userImage)
+//        val txtTemp:TextView = view.findViewById(R.id.temp)
+        val imgUser:CircleImageView = view.findViewById(R.id.userImageListUser)
         val layoutUser:LinearLayout = view.findViewById(R.id.layoutUser)
     }
 }

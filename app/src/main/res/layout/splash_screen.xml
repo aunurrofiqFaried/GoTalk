@@ -8,15 +8,16 @@
 
     <ImageView
         android:id="@+id/splashscreen"
-        android:layout_width="316dp"
-        android:layout_height="490dp"
-        android:background="@drawable/profile_image"
+        android:layout_width="318dp"
+        android:layout_height="331dp"
+        android:background="@drawable/splashscreen"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.424" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

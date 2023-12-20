@@ -3,14 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     tools:viewBindingIgnore="false"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/l1"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:gravity="center_vertical"
+        android:background="@drawable/bottom"
+        android:backgroundTint="@color/colorPrimary"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="0dp"
@@ -27,24 +30,27 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text=""
+            android:fontFamily="@font/ubuntureguler"
             android:textStyle="bold"
             android:textColor="@color/black"
+            android:paddingTop="5dp"
             android:layout_marginStart="15dp"
-            android:textSize="16sp" />
+            android:textSize="17sp" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="0dp"
-            android:layout_height="42dp"
+            android:layout_height="45dp"
             android:layout_weight="0.5"
             android:src="@drawable/profile_image"
             android:padding="5dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginEnd="15dp"
             android:id="@+id/imgProfile"/>
 
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_below="@+id/l1"
         android:id="@+id/chatRecyclerView"
+        android:background="@color/colorAccent"
         android:layout_above="@+id/r1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -66,18 +72,33 @@
                 android:id="@+id/etMessage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:layout_weight="1"
-                android:background="@color/colorTextBackground"
+                android:background="@drawable/rounded"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/ubuntureguler"
                 android:hint="@string/type_message"
-                android:inputType="textEmailAddress"
-                android:padding="12dp"
+                android:textSize="15dp"
+                android:inputType="text"
+                android:padding="9dp"
                 android:textColor="@color/colorText" />
 
             <ImageButton
+                android:id="@+id/btnSendImage"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/baseline_image_24"
+                android:background="@drawable/button_backround"
+                android:textColor="@color/colorAccent" />
+
+            <ImageButton
                 android:id="@+id/btnSendMessage"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="4dp"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:src="@drawable/ic_send"
                 android:background="@drawable/button_backround"
                 android:textColor="@color/colorAccent" />

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -44,12 +45,13 @@ class ChatAdapter(private val context: Context, private val chatList:ArrayList<C
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val chat = chatList[position]
         holder.txtUserName.text = chat.message
-        //Glide.with(context).load(user.profileImage).placeholder(R.drawable.profile_image).into(holder.imgUser)
+        Glide.with(context).load(chat.imgMessage).placeholder(R.drawable.profile_image).into(holder.imgMessage)
     }
 
     class ViewHolder(view:View):RecyclerView.ViewHolder(view){
         val txtUserName:TextView = view.findViewById(R.id.tvMessage)
-        val imgUser:CircleImageView = view.findViewById(R.id.userImage)
+        val imgMessage:ImageView = view.findViewById(R.id.imgMessage)
+//        val imgUser:CircleImageView = view.findViewById(R.id.userImage)
     }
 
     override fun getItemViewType(position: Int): Int {

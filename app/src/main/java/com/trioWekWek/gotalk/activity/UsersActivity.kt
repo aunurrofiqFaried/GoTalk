@@ -32,6 +32,7 @@ class UsersActivity : AppCompatActivity() {
     private lateinit var  binding: ActivityUsersBinding
     private lateinit var recycle: RecyclerView
     private lateinit var imgProfile: ImageView
+    private lateinit var imgProfileAtas: ImageView
     private lateinit var imgBack: ImageView
     var userList = ArrayList<User>()
 
@@ -49,15 +50,16 @@ class UsersActivity : AppCompatActivity() {
 
         recycle.layoutManager = LinearLayoutManager(this,LinearLayout.VERTICAL,false)
 
-        imgProfile = findViewById(R.id.imgProfile)
+//        imgProfile = findViewById(R.id.imgProfile)
         imgBack = findViewById(R.id.imgBack)
+        imgProfileAtas = findViewById(R.id.imgProfileAtas)
 
 
         imgBack.setOnClickListener{
             finishAffinity()
         }
 
-        imgProfile.setOnClickListener {
+        imgProfileAtas.setOnClickListener {
             val intent = Intent(
                 this@UsersActivity,
                 ProfileActivity::class.java
@@ -83,9 +85,9 @@ class UsersActivity : AppCompatActivity() {
                 userList.clear()
                 val currentUser = snapshot.getValue(User::class.java)
                 if (currentUser!!.profileImage == ""){
-                    binding.imgProfile.setImageResource(R.drawable.profile_image)
+                    imgProfileAtas.setImageResource(R.drawable.profile_image)
                 }else{
-                    Glide.with(this@UsersActivity).load(currentUser.profileImage).into(binding.imgProfile)
+                    Glide.with(this@UsersActivity).load(currentUser.profileImage).into(imgProfileAtas)
                 }
 
                 for (dataSnapShot: DataSnapshot in snapshot.children) {

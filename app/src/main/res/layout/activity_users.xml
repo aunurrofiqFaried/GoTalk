@@ -9,8 +9,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:gravity="center_vertical"
+        android:background="@drawable/bottom"
+        android:backgroundTint="@color/colorPrimary"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="0dp"
@@ -25,11 +27,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:fontFamily="@font/ubuntureguler"
             android:text="@string/label_message"
             android:textStyle="bold"
             android:textColor="@color/black"
+            android:paddingTop="5dp"
             android:layout_marginStart="15dp"
-            android:textSize="16sp" />
+            android:textSize="17sp" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="0dp"
@@ -37,11 +41,13 @@
             android:layout_weight="0.5"
             android:src="@drawable/profile_image"
             android:padding="5dp"
-            android:layout_marginStart="10dp"
-            android:id="@+id/imgProfile"/>
+            android:layout_marginEnd="15dp"
+            android:id="@+id/imgProfileAtas"/>
 
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingTop="4dp"
+        android:background="@color/colorAccent"
         android:id="@+id/userRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
