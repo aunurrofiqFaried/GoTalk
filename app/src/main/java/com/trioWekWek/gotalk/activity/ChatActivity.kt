@@ -94,6 +94,7 @@ class ChatActivity : AppCompatActivity() {
 
         btnSendImage.setOnClickListener {
             galerry.launch("image/*")
+            uploadImage()
         }
 
         reference!!.addValueEventListener(object : ValueEventListener{
@@ -114,13 +115,11 @@ class ChatActivity : AppCompatActivity() {
 
         btnSendMessage.setOnClickListener{
             var message:String = etMessage.text.toString()
-            uploadImage()
-
             if (message.isEmpty()){
-                Toast.makeText(applicationContext,"message is empety",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,"message is empty",Toast.LENGTH_SHORT).show()
                 etMessage.setText("")
             }else{
-                sendMessage(firebaseUser!!.uid,userId,message)
+                sendMessage(firebaseUser!!.uid,userId,message, imgMessage = String())
                 etMessage.setText("")
                 topic = "/topics/$userId"
                 PushNotification(NotificationData(userName!!,message),
@@ -141,14 +140,14 @@ class ChatActivity : AppCompatActivity() {
             }
     }
 
-    private fun sendMessage(senderId:String,receiverId:String,message:String){
+    private fun sendMessage(senderId:String,receiverId:String,message:String,imgMessage:String){
         var reference:DatabaseReference? = FirebaseDatabase.getInstance().getReference()
 
         var hashMap:HashMap<String,String> = HashMap()
         hashMap.put("senderId",senderId)
         hashMap.put("receiverId",receiverId)
         hashMap.put("message",message)
-        hashMap.put("imgMessage",message)
+        hashMap.put("imgMessage",imgMessage)
 
         reference!!.child("chat").push().setValue(hashMap)
     }
